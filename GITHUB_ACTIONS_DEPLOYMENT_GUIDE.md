@@ -45,13 +45,41 @@ jobs:
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        deploy_key: ${{ secrets.DEPLOY_KEY }}
         publish_dir: ./public
         publish_branch: main
         external_repository: loveylwforever/loveylwforever.github.io
 ```
 
-### 2. 配置pnpm workspace
+注意：我们使用`deploy_key`而不是`github_token`，因为我们需要推送到外部仓库。
+
+### 2. 配置部署密钥
+
+由于我们需要推送到外部仓库（GitHub Pages仓库），必须配置部署密钥：
+
+1. 生成SSH密钥对：
+   ```bash
+   ssh-keygen -t rsa -b 4096 -C "github-actions" -f github-actions -N ""
+   ```
+
+2. 将公钥添加到GitHub Pages仓库的部署密钥中：
+   - 访问 `https://github.com/loveylwforever/loveylwforever.github.io/settings/keys`
+   - 点击 "Add deploy key"
+   - Title: GitHub Actions
+   - Key: 粘贴公钥内容
+   - 勾选 "Allow write access"
+   - 点击 "Add key"
+
+3. 将私钥添加到源码仓库的Secrets中：
+   - 访问 `https://github.com/loveylwforever/gj_blog/settings/secrets/actions`
+   - 点击 "New repository secret"
+   - Name: DEPLOY_KEY
+   - Value: 粘贴私钥内容
+   - 点击 "Add secret"
+
+详细配置说明请参考 [GITHUB_ACTIONS_DEPLOY_KEY_SETUP.md](file:///Users/gaojian/01-P-Projects/hexo/gj_blog/GITHUB_ACTIONS_DEPLOY_KEY_SETUP.md)。
+
+### 3. 配置pnpm workspace
 
 确保[pnpm-workspace.yaml](file:///Users/gaojian/01-P-Projects/hexo/gj_blog/pnpm-workspace.yaml)文件配置正确：
 
@@ -63,7 +91,7 @@ packages:
 
 这个配置告诉pnpm将当前目录和themes目录下的所有子目录作为workspace的一部分。
 
-### 3. 配置package.json脚本
+### 4. 配置package.json脚本
 
 确保你的 [package.json](file:///Users/gaojian/01-P-Projects/hexo/gj_blog/package.json) 文件包含构建脚本：
 
@@ -78,7 +106,7 @@ packages:
 }
 ```
 
-### 4. 推送代码到GitHub
+### 5. 推送代码到GitHub
 
 将所有更改推送到你的源码仓库：
 
@@ -252,7 +280,7 @@ npm ERR! missing script: build
 
 你可以在工作流中添加通知步骤，例如Slack通知：
 
-```yaml
+```
 - name: Notify Slack
   uses: 8398a7/action-slack@v3
   with:
