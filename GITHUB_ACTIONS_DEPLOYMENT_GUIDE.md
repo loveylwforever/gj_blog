@@ -51,7 +51,19 @@ jobs:
         external_repository: loveylwforever/loveylwforever.github.io
 ```
 
-### 2. 配置package.json脚本
+### 2. 配置pnpm workspace
+
+确保[pnpm-workspace.yaml](file:///Users/gaojian/01-P-Projects/hexo/gj_blog/pnpm-workspace.yaml)文件配置正确：
+
+```yaml
+packages:
+  - '.'
+  - 'themes/*'
+```
+
+这个配置告诉pnpm将当前目录和themes目录下的所有子目录作为workspace的一部分。
+
+### 3. 配置package.json脚本
 
 确保你的 [package.json](file:///Users/gaojian/01-P-Projects/hexo/gj_blog/package.json) 文件包含构建脚本：
 
@@ -66,7 +78,7 @@ jobs:
 }
 ```
 
-### 3. 推送代码到GitHub
+### 4. 推送代码到GitHub
 
 将所有更改推送到你的源码仓库：
 
@@ -158,6 +170,84 @@ jobs:
     # ...
 ```
 
+## 故障排除
+
+### 查看构建日志
+1. 在仓库的 "Actions" 选项卡中找到失败的工作流
+2. 点击具体的运行记录
+3. 查看每个步骤的详细日志
+
+### 重新运行工作流
+如果工作流失败，可以点击 "Re-run jobs" 重新运行。
+
+### 常见错误及解决方案
+
+#### 1. ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION
+**错误信息**：
+```
+ ERR_PNPM_INVALID_WORKSPACE_CONFIGURATION  packages field missing or empty
+```
+**解决方案**：
+确保[pnpm-workspace.yaml](file:///Users/gaojian/01-P-Projects/hexo/gj_blog/pnpm-workspace.yaml)文件配置正确：
+```yaml
+packages:
+  - '.'
+  - 'themes/*'
+```
+
+#### 2. 权限问题
+**错误信息**：
+```
+ERROR: Repository not found.
+fatal: Could not read from remote repository.
+```
+**解决方案**：
+1. 确保GitHub Pages仓库已创建
+2. 检查工作流文件中的仓库名称是否正确
+3. 确保有足够权限访问仓库
+
+#### 3. Node.js版本问题
+**错误信息**：
+```
+Error: The engine "node" is incompatible with this module.
+```
+**解决方案**：
+在工作流中指定兼容的Node.js版本：
+```yaml
+- name: Setup Node.js
+  uses: actions/setup-node@v3
+  with:
+    node-version: '18'
+```
+
+#### 4. 依赖安装问题
+**错误信息**：
+```
+npm ERR! missing script: build
+```
+**解决方案**：
+确保[package.json](file:///Users/gaojian/01-P-Projects/hexo/gj_blog/package.json)中包含正确的脚本：
+```json
+{
+  "scripts": {
+    "build": "hexo generate"
+  }
+}
+```
+
+### 调试技巧
+
+1. **本地测试**：在推送之前，先在本地测试构建过程
+2. **简化工作流**：创建一个简化版本的工作流进行测试
+3. **使用GitHub CLI**：使用GitHub CLI查看工作流状态
+4. **启用详细日志**：在工作流中添加调试步骤
+
+### 联系支持
+如果问题持续存在，可以：
+1. 查看GitHub Actions文档
+2. 在相关社区寻求帮助
+3. 联系GitHub支持
+
 ## 监控和通知
 
 你可以在工作流中添加通知步骤，例如Slack通知：
@@ -179,19 +269,3 @@ jobs:
 3. **使用分支策略**：考虑使用分支策略，例如在main分支上进行部署，在其他分支上进行开发
 4. **监控构建时间**：注意构建时间，过长的构建时间可能影响体验
 5. **备份重要数据**：定期备份博客源码和重要配置
-
-## 故障排除
-
-### 查看构建日志
-1. 在仓库的 "Actions" 选项卡中找到失败的工作流
-2. 点击具体的运行记录
-3. 查看每个步骤的详细日志
-
-### 重新运行工作流
-如果工作流失败，可以点击 "Re-run jobs" 重新运行。
-
-### 联系支持
-如果问题持续存在，可以：
-1. 查看GitHub Actions文档
-2. 在相关社区寻求帮助
-3. 联系GitHub支持
