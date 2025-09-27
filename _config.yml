@@ -4,16 +4,16 @@
 
 # Site
 title: 高健的博客
-subtitle: ''
-description: ''
-keywords:
+subtitle: '技术分享与生活记录'
+description: 'Jamie Gao的个人博客，分享技术文章、生活感悟和编程经验'
+keywords: 博客,技术,编程,生活,分享
 author: Jamie Gao
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://loveylwforever.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:

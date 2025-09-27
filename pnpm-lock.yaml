@@ -23,6 +23,9 @@ importers:
       hexo-generator-index:
         specifier: ^4.0.0
         version: 4.0.0
+      hexo-generator-search:
+        specifier: ^2.4.3
+        version: 2.4.3(chokidar@3.6.0)
       hexo-generator-tag:
         specifier: ^2.0.0
         version: 2.0.0
@@ -44,6 +47,24 @@ importers:
       hexo-theme-landscape:
         specifier: ^1.0.0
         version: 1.1.0
+      hexo-util:
+        specifier: ^3.3.0
+        version: 3.3.0
+      hexo-wordcount:
+        specifier: ^6.0.1
+        version: 6.0.1
+      moment-timezone:
+        specifier: ^0.6.0
+        version: 0.6.0
+
+  themes/butterfly:
+    dependencies:
+      hexo-renderer-pug:
+        specifier: ^3.0.0
+        version: 3.0.0
+      hexo-renderer-stylus:
+        specifier: ^3.0.1
+        version: 3.0.1
       hexo-util:
         specifier: ^3.3.0
         version: 3.3.0
@@ -473,6 +494,10 @@ packages:
     resolution: {integrity: sha512-KeM7mOCKWINGFAk1E+CkjMMgqFIv8oaRbGxR7ipkQAp44o4aopkVftma4sdIplOq9WQEWfVYDUK5gEv9J3nzUg==, tarball: https://registry.npmmirror.com/hexo-generator-index/-/hexo-generator-index-4.0.0.tgz}
     engines: {node: '>=18'}
 
+  hexo-generator-search@2.4.3:
+    resolution: {integrity: sha512-Z5hfZq2g3np/Tgdp2q9HobfIvU6Pdz89tnTurc1IIq/vW0MHgDynk0Aiv6kvMtKWthnZ5l0iEMT3YLN35NdYwQ==, tarball: https://registry.npmmirror.com/hexo-generator-search/-/hexo-generator-search-2.4.3.tgz}
+    engines: {node: '>= 0.10.0'}
+
   hexo-generator-tag@2.0.0:
     resolution: {integrity: sha512-1px/hF3veEohWDN8jjzchQhaiz+uOStUvvMaBJC9vWOlALh30UFcapL8IrvAwwJZjFRVA+WqGgDRqoQ8+yaaFw==, tarball: https://registry.npmmirror.com/hexo-generator-tag/-/hexo-generator-tag-2.0.0.tgz}
     engines: {node: '>=14'}
@@ -519,6 +544,9 @@ packages:
   hexo-util@3.3.0:
     resolution: {integrity: sha512-YvGngXijE2muEh5L/VI4Fmjqb+/yAkmY+VuyhWVoRwQu1X7bmWodsfYRXX7CUYhi5LqsvH8FAe/yBW1+f6ZX4Q==, tarball: https://registry.npmmirror.com/hexo-util/-/hexo-util-3.3.0.tgz}
     engines: {node: '>=14'}
+
+  hexo-wordcount@6.0.1:
+    resolution: {integrity: sha512-tbo2P9xRWEKQmRf7+XuPjx9It1MnaE26nA+EEb2DN39gK1x+26W7Nm4Iyp4AugQjBWYYDx7OLn4gp1WFxQpQew==, tarball: https://registry.npmmirror.com/hexo-wordcount/-/hexo-wordcount-6.0.1.tgz}
 
   hexo@7.3.0:
     resolution: {integrity: sha512-dOe8mzBKrvjubW5oBmyhcnQDpC+M2xmAMLae5K+o+SkHxyvAhShkS2VQZoTsOLIJKY6xilv7dzCjCvE7ol/NHQ==, tarball: https://registry.npmmirror.com/hexo/-/hexo-7.3.0.tgz}
@@ -1503,6 +1531,13 @@ snapshots:
     dependencies:
       hexo-pagination: 3.0.0
 
+  hexo-generator-search@2.4.3(chokidar@3.6.0):
+    dependencies:
+      nunjucks: 3.2.4(chokidar@3.6.0)
+      utils-merge: 1.0.1
+    transitivePeerDependencies:
+      - chokidar
+
   hexo-generator-tag@2.0.0:
     dependencies:
       hexo-pagination: 3.0.0
@@ -1579,6 +1614,8 @@ snapshots:
       htmlparser2: 9.1.0
       prismjs: 1.30.0
       strip-indent: 3.0.0
+
+  hexo-wordcount@6.0.1: {}
 
   hexo@7.3.0(chokidar@3.6.0):
     dependencies:
